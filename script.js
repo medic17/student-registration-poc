@@ -4,22 +4,16 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
     const studentName = document.getElementById('studentName').value;
     const studentId = document.getElementById('studentId').value;
   
+    const GAS_app_url = 'https://script.google.com/macros/s/AKfycbwevrA1X8Z7wrqFdH40ZUoUlJhUsw7eL_W3UWzun8rauilgDbnCoSYUD-ClH39SeTmw/exec'
+
     try {
-      // Simulate a backend call to GAS
-      const mockSuccess = true; // Change to false to simulate an error
+      const response = await fetch(GAS_app_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ studentName, studentId }),
+      });
   
-      let data;
-      if (mockSuccess) {
-        data = {
-          status: 'success',
-          registrationId: 'REG-1234567890',
-        };
-      } else {
-        data = {
-          status: 'error',
-          error: 'Too many students',
-        };
-      }
+      const data = await response.json();
   
       // Handle success and error responses
       if (data.status === 'success') {
