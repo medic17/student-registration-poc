@@ -4,16 +4,15 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
     const studentName = document.getElementById('studentName').value;
     const studentId = document.getElementById('studentId').value;
 
-    // Use a placeholder URL for debugging
-    const GAS_app_url = 'https://script.google.com/macros/s/AKfycbwevrA1X8Z7wrqFdH40ZUoUlJhUsw7eL_W3UWzun8rauilgDbnCoSYUD-ClH39SeTmw/exec'; // Replace DUMMY with the actual Web App URL when ready
+    // Replace DUMMY with the actual Web App URL
+    const GAS_app_url = 'https://script.google.com/macros/s/AKfycbwevrA1X8Z7wrqFdH40ZUoUlJhUsw7eL_W3UWzun8rauilgDbnCoSYUD-ClH39SeTmw/exec';
 
     console.log('Attempting to connect to GAS:', GAS_app_url);
 
     try {
         const response = await fetch(GAS_app_url, {
-            redirect: 'follow',
             method: 'POST',
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ studentName, studentId }),
         });
 
@@ -36,6 +35,7 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
                 `Error: ${data.error}`;
         }
     } catch (error) {
+        // Improved error reporting
         console.error('Request failed:', error);
         document.getElementById('resultMessage').innerText =
             `Connection failed: ${error.message}`;
