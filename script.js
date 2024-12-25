@@ -11,8 +11,9 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
 
     try {
         const response = await fetch(GAS_app_url, {
+            redirect: 'follow',
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
             body: JSON.stringify({ studentName, studentId }),
         });
 
